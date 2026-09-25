@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: bank-aacount-service
+  datasource:
+    url: jdbc:h2:mem:bank-account-db
+  h2:
+    console:
+      enabled: true
+
+
+server:
+  port: 8080
+
+
