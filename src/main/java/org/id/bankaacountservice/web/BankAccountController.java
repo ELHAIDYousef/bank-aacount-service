@@ -1,8 +1,7 @@
 package org.id.bankaacountservice.web;
 
+import org.id.bankaacountservice.dto.AccountRequest;
 import org.id.bankaacountservice.dto.AccountResponse;
-import org.id.bankaacountservice.dto.CreateAccountRequest;
-import org.id.bankaacountservice.dto.UpdateAccountRequest;
 import org.id.bankaacountservice.service.BankAccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class BankAccountController {
 
     // POST /accounts  -> 201 Created + Location header
     @PostMapping
-    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Validated CreateAccountRequest request) {
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Validated AccountRequest request) {
         AccountResponse created = bankAccountService.createBankAccount(request);
         URI location = URI.create("/accounts/" + created.id());
         return ResponseEntity.created(location).body(created);
@@ -45,7 +44,7 @@ public class BankAccountController {
     // PUT /accounts/{id}
     @PutMapping("/{id}")
     public AccountResponse updateResponseEntityAccount(@PathVariable String id,
-                                         @RequestBody @Validated UpdateAccountRequest request) {
+                                         @RequestBody @Validated AccountRequest request) {
         return bankAccountService.updateBankAccount(id, request);
     }
 

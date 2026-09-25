@@ -2,9 +2,9 @@ package org.id.bankaacountservice.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.id.bankaacountservice.dto.AccountRequest;
 import org.id.bankaacountservice.dto.AccountResponse;
 import org.id.bankaacountservice.dto.CreateAccountRequest;
-import org.id.bankaacountservice.dto.UpdateAccountRequest;
 import org.id.bankaacountservice.entity.BankAccount;
 import org.id.bankaacountservice.mapper.BankAccountMapper;
 import org.id.bankaacountservice.repository.BankAccountRepository;
@@ -40,7 +40,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public AccountResponse createBankAccount(CreateAccountRequest request) {
+    public AccountResponse createBankAccount(AccountRequest request) {
         BankAccount account = mapper.toEntity(request);
         account.setId(UUID.randomUUID().toString());     // server controls the id
         account.setCreatedAt(new Date());             // and the timestamp
@@ -48,7 +48,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public AccountResponse updateBankAccount(String id, UpdateAccountRequest request) {
+    public AccountResponse updateBankAccount(String id, AccountRequest request) {
         BankAccount account = findEntity(id);
         if (request.balance()  <= 0 ) account.setBalance(request.balance());
         if (request.currency() != null) account.setCurrency(request.currency());
