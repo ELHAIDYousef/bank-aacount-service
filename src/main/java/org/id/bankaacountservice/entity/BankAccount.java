@@ -7,13 +7,13 @@ import org.id.bankaacountservice.enums.AccountType;
 import java.util.Date;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class BankAccount {
     @Id
     private String id;
     private Date createdAt;
     private double balance;
     private String currency;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private AccountType type;
 }
